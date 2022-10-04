@@ -52,7 +52,7 @@ public class Main {
 						  System.out.println("Input file is read successfully...");
 						  System.out.println("Summary of the record:");
 						  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-						  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+						  System.out.println("Number of total students: " + singly.getStudentsTotal());
 						  while (true) {
 							/*
 								System.out.print(
@@ -78,7 +78,7 @@ public class Main {
 
 									  System.out.println("Summary of the record:");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-									  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
 								  case 3:
 									  Scanner inputOne = new Scanner(System.in);
@@ -93,7 +93,7 @@ public class Main {
 
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-									  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
 								  case 4:
 									  Scanner inputId= new Scanner(System.in);
@@ -106,7 +106,7 @@ public class Main {
 									  doubly.deleteCourse(courseNumberInput);
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-									  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
 								  case 5:
 									  Scanner newCourseNumber = new Scanner(System.in);
@@ -127,7 +127,7 @@ public class Main {
 									  singly.insertAddress(newAddress);
 									  System.out.print("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-									  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
 								  case 6:
 									  Scanner enrolledStudent = new Scanner(System.in);
@@ -145,7 +145,7 @@ public class Main {
 
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
-									  System.out.println("Number of total students: " + doubly.getStudentsTotal());
+									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
 								  case 7:
 									  System.out.println("The list of courses registered are as follows: ");

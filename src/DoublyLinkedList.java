@@ -4,27 +4,31 @@ public class DoublyLinkedList {
     class Node {
         private String courseNumber;
         private String courseName;
+        public Node studentList;
         private Node next;
         private Node prev;
+
+        // Pointer to first node in singly linked list
+        private SinglyLinkedList.SingleNode firstNode;
 
         public Node(String courseNumber, String courseName ){
             this.courseNumber = courseNumber;
             this.courseName = courseName;
             next = null;
             prev = null;
+            firstNode = null;
         }
     }
 
     // DoublyLinked List
     private Node head;
     private Node tail;
-    private int totalStudents;
+    // private SinglyLinkedList.SingleNode tail;
     private int totalCourses;
 
     public DoublyLinkedList() {
         this.head = null;
         this.tail = null;
-        this.totalStudents = 0;
         this.totalCourses = 0;
     }
     // Delete course by course number
@@ -54,7 +58,6 @@ public class DoublyLinkedList {
         if (head==null){
             head=newNode;
             head.prev=null;
-            totalStudents++;
             totalCourses++;
             return;
         }
@@ -63,7 +66,6 @@ public class DoublyLinkedList {
         head=newNode;
 
         // Increase courses and students total
-        totalStudents++;
         totalCourses++;
     }
     public void printCourses(){
@@ -73,9 +75,6 @@ public class DoublyLinkedList {
             System.out.println("Course Number: " + current.courseNumber);
             current=current.next;
         }
-    }
-    public int getStudentsTotal() {
-        return totalStudents;
     }
     public int getCoursesTotal() {
         return totalCourses;

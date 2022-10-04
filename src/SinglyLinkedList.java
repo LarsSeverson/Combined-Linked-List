@@ -2,32 +2,54 @@ import java.util.Objects;
 
 public class SinglyLinkedList {
 
-
     class SingleNode {
+        private String iD;
+        private String studentsName;
+        private String address;
+        private String email;
+        private SingleNode next;
 
-    }
-
-    /*
-    public void deleteStudent(String student){
-        DoublyLinkedList.Node current = head;
-        while (!Objects.equals(current.student, student)){
-            current=current.next;
+        public SingleNode(String iD, String studentsName, String address, String email ){
+            this.iD = iD;
+            this.studentsName = studentsName;
+            this.address = address;
+            this.email = email;
+            next = null;
         }
-        current.student=null;
-
-        // Decreasing courses total
-        totalStudents--;
     }
-     */
 
-    public void setData(String s, String value, String value1, String value2) {
+    // Pointer to first node in doubly linked list
+    private DoublyLinkedList.Node tail;
+    private SingleNode head;
+    private int totalStudents;
+    public void setData(String studentNames, String iD, String email, String address) {
+        SingleNode newNode = new SingleNode(studentNames, iD, email, address);
 
+
+        // Increase students total sum
+        totalStudents++;
+    }
+    // Getting total number of students in list
+    public int getStudentsTotal() {
+        return totalStudents;
     }
     // Delete from list based on ID
     public void deleteId(String iD) {
+
+        SingleNode current = head;
+        while (!Objects.equals(current.iD, iD)){
+            current=current.next;
+        }
+        current.iD=null;
+
+        // Decreasing sum of students;
+        totalStudents--;
     }
     // Insert into list based on name
     public void insertName(String newStudentsName) {
+
+        // Adding new student to total sum
+        totalStudents++;
     }
     // Insert into list based on ID
     public void insertId(String newId) {
