@@ -15,7 +15,7 @@ public class Main {
 		  try {
 			  // Inputting text file and separating it by commas
 			  BufferedReader textInput = new BufferedReader(
-					  new FileReader("inputFile2.txt"));
+					  new FileReader("inputFile.txt"));
 
 			  String str;
 			  int i = 1;
@@ -27,7 +27,7 @@ public class Main {
 					  doubly.setData(values[0], values[1]);
 
 					  // Getting student names, ID, email, address for singly linked list
-					  singly.setData((values[3]) + " " + (values[2]), values[4], values[5], values[6]);
+					  singly.setData((values[3]).replaceAll("\\s", "") + " " + (values[2]), values[4], values[5], values[6]);
 
 					  //studentNames();
 					  // Getting emails
@@ -68,7 +68,7 @@ public class Main {
 							  int secondOptions = secondInput.nextInt();
 							  switch (secondOptions) {
 								  case 2:
-									  System.out.println("Enter the course number to delete: ");
+									  System.out.print("Enter the course number to delete: ");
 									  // Getting course number to delete
 									  Scanner delete = new Scanner(System.in);
 									  String courseToDelete = delete.nextLine();
@@ -115,17 +115,20 @@ public class Main {
 									  Scanner newStudentId = new Scanner(System.in);
 									  System.out.print("Enter the course number the student wants to enroll to: ");
 									  String newCourseNumberInsert = newCourseNumber.nextLine();
-									  doubly.getCourseNumber(newCourseNumberInsert);
-									  System.out.print("Enter the student's name: ");
-									  String newStudentsName = newStudentName.nextLine();
-									  singly.insertName(newStudentsName);
-									  System.out.print("Enter the student's ID: ");
-									  String newId = newStudentId.nextLine();
-									  singly.insertId(newId);
-									  System.out.print("Enter the student's emergency contact address: ");
-									  String newAddress = newStudentAddress.nextLine();
-									  singly.insertAddress(newAddress);
-									  System.out.print("Summary of the record: ");
+									  if (doubly.getCourseNumber(newCourseNumberInsert)){
+										  System.out.print("Enter the student's name: ");
+										  String newStudentsName = newStudentName.nextLine();
+										  singly.insertName(newStudentsName);
+										  System.out.print("Enter the student's ID: ");
+										  String newId = newStudentId.nextLine();
+										  singly.insertId(newId);
+										  System.out.print("Enter the student's emergency contact address: ");
+										  String newAddress = newStudentAddress.nextLine();
+										  singly.insertAddress(newAddress);
+								  		} else {
+										  System.out.println("Course does not exist...");
+									  }
+									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
 									  System.out.println("Number of total students: " + singly.getStudentsTotal());
 									  break;
@@ -135,14 +138,16 @@ public class Main {
 									  Scanner newCourseNumberToEnroll = new Scanner(System.in);
 									  System.out.print("Enter student's name: ");
 									  String enrolledStudentName = enrolledStudent.nextLine();
-									  singly.getStudentName(enrolledStudentName);
-									  System.out.print("Enter the course number the student wants to dropped from: ");
-									  String enrolledCourseToDrop = enrolledCourseNumber.nextLine();
-									  doubly.deleteCourse(enrolledCourseToDrop);
-									  System.out.print("Enter the course number the student wants to enrolled to: ");
-									  String newCourseToEnroll = newCourseNumberToEnroll.nextLine();
-									  doubly.insertCourseByNumber(newCourseToEnroll);
-
+									  if (singly.getStudentsName(enrolledStudentName)){
+										  System.out.print("Enter the course number the student wants to dropped from: ");
+										  String enrolledCourseToDrop = enrolledCourseNumber.nextLine();
+										  doubly.deleteCourse(enrolledCourseToDrop);
+										  System.out.print("Enter the course number the student wants to enrolled to: ");
+										  String newCourseToEnroll = newCourseNumberToEnroll.nextLine();
+										  doubly.insertCourseByNumber(newCourseToEnroll);
+									  } else {
+										  System.out.println("Student does not exist...");
+									  }
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
 									  System.out.println("Number of total students: " + singly.getStudentsTotal());
