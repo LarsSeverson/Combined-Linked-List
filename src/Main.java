@@ -24,7 +24,7 @@ public class Main {
 					  String[] values = str.split(",");
 
 					// Setting course number and course names for doubly linked list
-					  doubly.setData(values[0], values[1]);
+					  doubly.insertCourse(values[0], values[1], 0);
 
 					  // Getting student names, ID, email, address for singly linked list
 					  singly.setData((values[3]).replaceAll("\\s", "") + " " + (values[2]), values[4], values[5], values[6]);
@@ -89,7 +89,7 @@ public class Main {
 									  String courseName = inputTwo.nextLine();
 
 									  //doubly linked list to add method
-									  doubly.insertCourse(courseNumber, courseName);
+									  doubly.insertCourse(courseNumber, courseName, 0);
 
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
@@ -102,8 +102,7 @@ public class Main {
 									  String iD = inputId.nextLine();
 									  singly.deleteId(iD);
 									  System.out.print("Enter the course number from which the student is to be dropped from: ");
-									  String courseNumberInput = inputCourseNumber.nextLine();
-									  doubly.deleteCourse(courseNumberInput);
+									  inputCourseNumber.nextLine(); // down the line check if course is valid
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
 									  System.out.println("Number of total students: " + singly.getStudentsTotal());
@@ -113,18 +112,24 @@ public class Main {
 									  Scanner newStudentName = new Scanner(System.in);
 									  Scanner newStudentAddress = new Scanner(System.in);
 									  Scanner newStudentId = new Scanner(System.in);
+
 									  System.out.print("Enter the course number the student wants to enroll to: ");
 									  String newCourseNumberInsert = newCourseNumber.nextLine();
+
 									  if (doubly.getCourseNumber(newCourseNumberInsert)){
+										  doubly.getCourse(newCourseNumberInsert).getTheStudent();
+										  /*
 										  System.out.print("Enter the student's name: ");
 										  String newStudentsName = newStudentName.nextLine();
-										  singly.insertName(newStudentsName);
+										  singly.setName(newStudentsName);
 										  System.out.print("Enter the student's ID: ");
 										  String newId = newStudentId.nextLine();
 										  singly.insertId(newId);
 										  System.out.print("Enter the student's emergency contact address: ");
 										  String newAddress = newStudentAddress.nextLine();
 										  singly.insertAddress(newAddress);
+
+										   */
 								  		} else {
 										  System.out.println("Course does not exist...");
 									  }
@@ -138,6 +143,7 @@ public class Main {
 									  Scanner newCourseNumberToEnroll = new Scanner(System.in);
 									  System.out.print("Enter student's name: ");
 									  String enrolledStudentName = enrolledStudent.nextLine();
+
 									  if (singly.getStudentsName(enrolledStudentName)){
 										  System.out.print("Enter the course number the student wants to dropped from: ");
 										  String enrolledCourseToDrop = enrolledCourseNumber.nextLine();
@@ -145,7 +151,8 @@ public class Main {
 										  System.out.print("Enter the course number the student wants to enrolled to: ");
 										  String newCourseToEnroll = newCourseNumberToEnroll.nextLine();
 										  doubly.insertCourseByNumber(newCourseToEnroll);
-									  } else {
+									  }
+									  else {
 										  System.out.println("Student does not exist...");
 									  }
 									  System.out.println("Summary of the record: ");
@@ -164,7 +171,7 @@ public class Main {
 									  singly.printCourseSummary(display);
 									  break;
 								  case 9:
-									  System.out.println("Exiting program...");
+									  System.out.println("Exiting program... fart");
 									  System.exit(1);
 							  }
 						  }
