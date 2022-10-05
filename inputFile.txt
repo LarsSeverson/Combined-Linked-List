@@ -1,4 +1,4 @@
-Course Number,Course Name,Student's Name,Student's ID,Email,Address
+Course Number,Course Name,Students's Name,Students's ID,Email,Address
 CS 3363,Organization of Programming Languages,River Vickery, Seth ,A205820,srvickery@okstate.edu,7874 Wellington Ave.Oklahoma City, OK 73169
 CS 4513,Introduction to Numerical Analysis,Alena Goode, Tiera ,A203183,tagoode@okstate.edu,50 Race StreetSpencer, OK 73084
 CS 3030,Industrial Practice in Computer Science,Barrett Bowser, Ronaldo ,A892726,rbbowser@okstate.edu,24 Wagon St.Oklahoma City, OK 73130

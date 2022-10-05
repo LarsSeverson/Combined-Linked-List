@@ -5,15 +5,14 @@ public class DoublyLinkedList {
     private Node head;
     private Node tail;
 
-
     private int totalCourses;
-    private int studentsPerCourse;
+    private static int totalStudentCount;
 
     public DoublyLinkedList() {
         this.head = null;
         this.tail = null;
         this.totalCourses = 0;
-        this.studentsPerCourse = 0;
+        totalStudentCount = 0;
     }
     // Delete course by course number
     public void deleteCourse(String courseNumber) {
@@ -28,11 +27,18 @@ public class DoublyLinkedList {
         totalCourses--;
     }
     // Insert by course and course name
-    public void insertCourse(String courseNumber, String courseName, int studentsPerCourse) {
-        Node newNode = new Node(courseNumber, courseName, studentsPerCourse);
+    public void setData(String courseNumber, String courseName, int studentsPerCourse
+    ,String studentNames, String iD, String email, String address) {
+
+        Node newNode = new Node(courseNumber, courseName, studentsPerCourse,
+                studentNames, iD, email, address);
+
         if(head == null){
             tail=newNode;
             head=newNode;
+            totalCourses++;
+            totalStudentCount++;
+            return;
         }
 
         newNode.next=head;
@@ -41,94 +47,84 @@ public class DoublyLinkedList {
 
         // Increasing courses total
         totalCourses++;
+        totalStudentCount++;
     }
-    // Insert only by course number
-    public void insertCourseByNumber(String newCourseNumberInsert) {
-        Node newNode = new Node(newCourseNumberInsert);
-        if(head==null){
-            tail=newNode;
-            head=newNode;
-        }
-        newNode.next=head;
-        head.prev=newNode;
-        head=newNode;
 
-        // Increasing courses total
-        totalCourses++;
-    }
     public int getCoursesTotal() {
         return totalCourses;
     }
-
-   // Getting a course that is already in the list
-   public boolean getCourseNumber(String newCourseNumberInsert) {
+    public static int getTotalStudentCount() {
+        return totalStudentCount;
+    }
+    public static void minusStudentCount(){
+        totalStudentCount--;
+    }
+    // Getting a course that is already in the list
+   public boolean found(String course) {
         Node current = head;
-        while (current != null) {
-            if (current.courseNumber.equals(newCourseNumberInsert)) {
+        while(current != null){
+            if (current.courseNumber.equals(course)){
                 return true;
             }
             else {
-               current=current.next;
+                current = current.next;
             }
-       }
-       return false;
+        }
+        return false;
     }
 
     // Outputting summary of everything in format required
     public void printCoursesSummary() {
-        Node courses = head;
-        Node coursesName = head;
-
-        while(courses !=null && coursesName !=null) {
-            System.out.println("Course Number: " + courses.courseNumber);
-            courses = courses.next;
-            System.out.println("Course Name: " + coursesName.courseName);
-            coursesName=coursesName.next;
-            System.out.println("Number of students enrolled: ");
-            // show students per each course
+        Node current = head;
+        while(current != null){
+            System.out.println("Course Number:" + current.courseNumber);
+            System.out.println("Course Name:" + current.courseName);
+            System.out.println("Number of students enrolled: " + current.studentsPerCourse);
+            current = current.next;
         }
     }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public Node getCourse(String courseNumber){
+    public void addStudent(String name, String courseNumber, String studentID, String studentAdress) {
         Node current = head;
         while(!Objects.equals(current.courseNumber, courseNumber)){
             current = current.next;
         }
-        return current;
+        current.students.addNewStudentToCourse(name, studentID, studentAdress);
+
+        System.out.println(current.studentsPerCourse);
+        current.studentsPerCourse++;
+        System.out.println(current.studentsPerCourse);
+
+        totalStudentCount++;
+    }
+    public void dropStudentAndAdd(String courseNumber, String studentName, String courseToEnroll){
+        Node current = head;
+        while(!current.students.getStudentsName(studentName)){
+            current = current.next;
+        }
+        current.students.deleteStudent(studentName);
+        addStudent(studentName, courseToEnroll, " ", " ");
     }
 
-    // No other option but to make Node public, since it needs to be accessed throughout
-    // multiple data structures. You fucking suck professor
-    public class Node {
+    private class Node {
         private String courseNumber;
         private String courseName;
 
         private int studentsPerCourse;
+        private Students students;
 
         private Node next;
         private Node prev;
-        private SinglyLinkedList.Node theStudent;
 
         // Default constructor for two inputs
-        public Node(String courseNumber, String courseName, int studentsPerCourse){
+        public Node(String courseNumber, String courseName, int studentsPerCourse,
+                    String studentNames, String iD, String email, String address){
             this.courseNumber = courseNumber;
             this.courseName = courseName;
             this.studentsPerCourse = studentsPerCourse;
             this.next = null;
             this.prev = null;
-            theStudent = null;
-        }
-        // Default constructor for one input to check if it exists in list
-        public Node(String courseNumber){
-            this.courseNumber = courseNumber;
-        }
-        public SinglyLinkedList.Node getTheStudent() {
-            theStudent = theStudent.getHead();
-            return theStudent;
+
+            students = new Students(studentNames, iD, email, address);
         }
     }
 }
