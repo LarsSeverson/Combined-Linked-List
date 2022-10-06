@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -89,11 +87,14 @@ public class Main {
 								  case 4 -> {
 									  Scanner inputId = new Scanner(System.in);
 									  Scanner inputCourseNumber = new Scanner(System.in);
+									  // "deleted" or dropped... how can the teacher not be specific
+									  // assuming teacher meant dropped, bc it also requires course
 									  System.out.print("Enter the student ID number to delete: ");
 									  String iD = inputId.nextLine();
-									  //doubly.getTheStudent().deleteId(iD);
 									  System.out.print("Enter the course number from which the student is to be dropped from: ");
-									  inputCourseNumber.nextLine(); // down the line check if course is valid
+									  String course = inputCourseNumber.nextLine(); // down the line check if course is valid
+									  doubly.dropStudentFromCourse("", course, iD);
+
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
 									  System.out.println("Number of total students: " + DoublyLinkedList.getTotalStudentCount());
@@ -112,7 +113,7 @@ public class Main {
 										  String id = newStudentId.nextLine();
 										  System.out.print("Enter the student's emergency contact address: ");
 										  String address = newStudentAddress.nextLine();
-										  doubly.addStudent(name, newCourseNumberInsert, id, address);
+										  doubly.addStudentToCourse(name, newCourseNumberInsert, id, address);
 									  }
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());
@@ -129,7 +130,9 @@ public class Main {
 									  String courseToDrop = enrolledCourseNumber.nextLine();
 									  System.out.print("Enter the course number the student wants to enroll to: ");
 									  String courseToEnroll = newCourseNumberToEnroll.nextLine();
-									  doubly.dropStudentAndAdd(courseToDrop, enrolledStudentName, courseToEnroll);
+									  doubly.dropStudentFromCourse(enrolledStudentName, courseToDrop, "");
+									  // Unorganized assignment so studentID/studentAddress is nothing
+									  doubly.addStudentToCourse(enrolledStudentName, courseToEnroll, "", "");
 
 									  System.out.println("Summary of the record: ");
 									  System.out.println("Number of courses registered: " + doubly.getCoursesTotal());

@@ -29,10 +29,14 @@ public class Students {
         // Decreasing sum of students
         DoublyLinkedList.minusStudentCount();
     }
-    public void deleteStudent(String name){
+    public void deleteStudent(String name, String ID){
         Student current = head;
         Student prev = head;
-        while(current.studentsName != name){
+        if (Objects.equals(head.studentsName, name) || Objects.equals(head.iD, ID)){
+            head = head.next;
+            return;
+        }
+        while(!Objects.equals(current.studentsName, name) || !Objects.equals(current.iD, ID)){
             prev = current;
             current = current.next;
         }

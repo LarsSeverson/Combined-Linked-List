@@ -83,26 +83,21 @@ public class DoublyLinkedList {
             current = current.next;
         }
     }
-    public void addStudent(String name, String courseNumber, String studentID, String studentAdress) {
+    public void addStudentToCourse(String name, String courseNumber, String studentID, String studentAdress) {
         Node current = head;
         while(!Objects.equals(current.courseNumber, courseNumber)){
             current = current.next;
         }
         current.students.addNewStudentToCourse(name, studentID, studentAdress);
-
-        System.out.println(current.studentsPerCourse);
         current.studentsPerCourse++;
-        System.out.println(current.studentsPerCourse);
-
-        totalStudentCount++;
     }
-    public void dropStudentAndAdd(String courseNumber, String studentName, String courseToEnroll){
+    public void dropStudentFromCourse(String studentName, String courseToDrop, String studentID){
         Node current = head;
-        while(!current.students.getStudentsName(studentName)){
+        while(!Objects.equals(current.courseNumber, courseToDrop)){
             current = current.next;
         }
-        current.students.deleteStudent(studentName);
-        addStudent(studentName, courseToEnroll, " ", " ");
+        current.students.deleteStudent(studentName, studentID);
+        current.studentsPerCourse--;
     }
 
     private class Node {
