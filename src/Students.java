@@ -36,8 +36,11 @@ public class Students {
             head = head.next;
             return;
         }
-        while(!Objects.equals(current.studentsName, name) || !Objects.equals(current.iD, ID)){
+        while(current != null){
             prev = current;
+            if (Objects.equals(current.studentsName, name) || Objects.equals(current.iD, ID)){
+                break;
+            }
             current = current.next;
         }
         prev.next = prev.next.next;
