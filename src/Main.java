@@ -39,7 +39,7 @@ public class Main {
 							  // Setting course number and course names for doubly linked list
 							  doubly.addCourse(values[0], values[1]);
 							  										// NAME             // COURSE   // id     // EMAIL	 // ADDRESS
-							  doubly.addStudentToCourse(values[3] + values[2], values[0], values[4], values[5], values[6]);
+							  doubly.addStudentToCourse(values[3].replaceAll(" ", "") + " " + values[2], values[0], values[4], values[5], values[6]);
 						  }
 						  i++;
 					  }

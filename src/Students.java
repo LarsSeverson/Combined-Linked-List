@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class Students {
@@ -25,10 +24,10 @@ public class Students {
             return;
         }
         while(current != null){
-            prev = current;
             if (Objects.equals(current.studentsName, name) || Objects.equals(current.iD, ID)){
                 break;
             }
+            prev = current;
             current = current.next;
         }
         prev.next = prev.next.next;
