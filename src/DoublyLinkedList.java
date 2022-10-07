@@ -17,37 +17,39 @@ public class DoublyLinkedList {
     // Delete course by course number
     public void deleteCourse(String courseNumber) {
         Node current = head;
-        while (!Objects.equals(current.courseNumber, courseNumber)){
-            current=current.next;
-        }
-        current.courseNumber=null;
-        current.courseName=null;
-
-        // Decreasing courses total
-        totalCourses--;
-    }
-    // Insert by course and course name
-    public void setData(String courseNumber, String courseName, int studentsPerCourse
-    ,String studentNames, String iD, String email, String address) {
-
-        Node newNode = new Node(courseNumber, courseName, studentsPerCourse,
-                studentNames, iD, email, address);
-
-        if(head == null){
-            tail=newNode;
-            head=newNode;
-            totalCourses++;
-            totalStudentCount++;
+        if(Objects.equals(head.courseNumber, courseNumber)){
+            head = head.next;
             return;
         }
 
-        newNode.next=head;
-        head.prev=newNode;
-        head=newNode;
-
-        // Increasing courses total
+        while (!Objects.equals(current.courseNumber, courseNumber)){
+            current=current.next;
+        }
+        if (current.next == null){
+            current.prev = tail;
+            totalCourses--;
+            return;
+        }
+        current.next.prev = current.prev;
+        current.prev.next = current.next;
+        // Decreasing courses total
+        totalCourses--;
+    }
+    public void addCourse(String courseNUmber, String courseName){
+        if (found(courseNUmber)){
+            return;
+        }
+        Node newNode = new Node(courseNUmber, courseName);
+        if (head == null){
+            tail = newNode;
+            head = newNode;
+            totalCourses++;
+            return;
+        }
+        newNode.next = head;
+        head.prev = newNode;
+        head = newNode;
         totalCourses++;
-        totalStudentCount++;
     }
 
     public int getCoursesTotal() {
@@ -56,11 +58,8 @@ public class DoublyLinkedList {
     public static int getTotalStudentCount() {
         return totalStudentCount;
     }
-    public static void minusStudentCount(){
-        totalStudentCount--;
-    }
     // Getting a course that is already in the list
-   public boolean found(String course) {
+    public boolean found(String course) {
         Node current = head;
         while(current != null){
             if (current.courseNumber.equals(course)){
@@ -83,13 +82,14 @@ public class DoublyLinkedList {
             current = current.next;
         }
     }
-    public void addStudentToCourse(String name, String courseNumber, String studentID, String studentAdress) {
+    public void addStudentToCourse(String name, String courseNumber, String studentID, String studentAdress, String email) {
         Node current = head;
         while(!Objects.equals(current.courseNumber, courseNumber)){
             current = current.next;
         }
-        current.students.addNewStudentToCourse(name, studentID, studentAdress);
+        current.students.setData(name, studentID, email, studentAdress);
         current.studentsPerCourse++;
+        totalStudentCount++;
     }
     public void dropStudentFromCourse(String studentName, String courseToDrop, String studentID){
         Node current = head;
@@ -98,6 +98,15 @@ public class DoublyLinkedList {
         }
         current.students.deleteStudent(studentName, studentID);
         current.studentsPerCourse--;
+    }
+    public void displayCourseInfo(String courseNumber){
+        Node current = head;
+        while(!Objects.equals(current.courseNumber, courseNumber)){
+            current = current.next;
+        }
+        System.out.println();
+        System.out.println("Students ID      Students Name     Email      Address");
+        current.students.displayInfo();
     }
 
     private class Node {
@@ -111,15 +120,10 @@ public class DoublyLinkedList {
         private Node prev;
 
         // Default constructor for two inputs
-        public Node(String courseNumber, String courseName, int studentsPerCourse,
-                    String studentNames, String iD, String email, String address){
+        public Node (String courseNumber, String courseName){
             this.courseNumber = courseNumber;
             this.courseName = courseName;
-            this.studentsPerCourse = studentsPerCourse;
-            this.next = null;
-            this.prev = null;
-
-            students = new Students(studentNames, iD, email, address);
+            students = new Students();
         }
     }
 }

@@ -1,12 +1,12 @@
+import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class Students {
     private Student head = null;
 
-    Students(String studentNames, String iD, String email, String address){
-        setData(studentNames, iD, email, address);
-    }
+    Students(){
 
+    }
     public void setData(String studentNames, String iD, String email, String address) {
         Student newNode = new Student(studentNames, iD, email, address);
         if (head == null){
@@ -15,20 +15,8 @@ public class Students {
         }
         newNode.next = head;
         head = newNode;
-        // Increase students total sum
     }
 
-    // Delete from list based on ID
-    public void deleteId(String iD) {
-        Student current = head;
-        while (!Objects.equals(current.iD, iD)){
-            current=current.next;
-        }
-        current.iD = null;
-
-        // Decreasing sum of students
-        DoublyLinkedList.minusStudentCount();
-    }
     public void deleteStudent(String name, String ID){
         Student current = head;
         Student prev = head;
@@ -45,25 +33,15 @@ public class Students {
         }
         prev.next = prev.next.next;
     }
-    // Get a student's name that is already in the list return true
-    public boolean getStudentsName(String enrolledStudentName) {
+    public void displayInfo(){
         Student current = head;
-        while (current != null) {
-            if (current.studentsName.equals(enrolledStudentName)) {
-                return true;
-            }
+        while(current != null){
+            System.out.print(current.iD + "\t" + current.studentsName
+            + "\t" + current.email + "\t" + current.address);
             current = current.next;
+            System.out.println();
         }
-        System.out.println("Not found");
-        return false;
     }
-
-    public void addNewStudentToCourse(String newStudentsName, String studentID, String studentAddress) {
-        Student newStudent = new Student(newStudentsName, studentID, "", studentAddress);
-        newStudent.next = head;
-        head = newStudent;
-    }
-
     public class Student {
         private String iD;
         private String studentsName;
